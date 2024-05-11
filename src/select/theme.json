@@ -4,8 +4,6 @@
     "color": "#000000",
     "accentColorLight": "rgb(239, 244, 250)",
     "accentColorDark": "rgb(71, 117, 198)",
-    
     "transition": "all .5s ease-out",
     "font": "'Roboto', sans-serif"
-   
  }

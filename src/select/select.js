@@ -8,7 +8,6 @@ import theme from './theme.json';
 const SelectDropdown = ({ type, options, identifier}) => {
 
     const [selected, setSelected] = useState([]);
-
     const [showDropDown, setShowDropDown] = useState(false);
 
     /**
@@ -31,7 +30,10 @@ const SelectDropdown = ({ type, options, identifier}) => {
         }
     }, [options]);
 
-
+    /**
+     * If the type of the select field changes to a single select, then we 
+     * should remove all selected options except the first one
+     */
     useEffect(() => {
         if (type === 'select' && selected.length > 1) {
             setSelected(selected => [selected[0]]);
@@ -44,7 +46,6 @@ const SelectDropdown = ({ type, options, identifier}) => {
         }).map(opt => opt.string).join(', ');
 
     }, [selected, options]);
-
 
     let component;
     if (type === 'select') {
@@ -66,7 +67,7 @@ const SelectDropdown = ({ type, options, identifier}) => {
      * This link explains why we needed to set tabindex="0" on the Wrapper element
      */
     const handleBlur = (event) => {
-    //    setShowDropDown(event.currentTarget.contains(event.relatedTarget));
+        setShowDropDown(event.currentTarget.contains(event.relatedTarget));
     }
     console.log(theme)
     return (
@@ -91,7 +92,6 @@ const Wrapper = styled.div`
     */
     width: min(250px, 100%);
     position: relative; // Since we are setting child to be absolutely positioned
-
     font-family: ${props => props.theme.font} !important;
 `;
 const ValuesBox = styled.button`
@@ -102,11 +102,8 @@ const ValuesBox = styled.button`
     border: 1px ${props => props.theme.accentColorDark} solid;
     border-radius: 4px;
     padding: 8px;
-
-
     font-size: 14px;
     line-height: 1.5;
-
     cursor: pointer;
 `;
 
@@ -117,7 +114,6 @@ const SelectWrapper = styled.div`
     max-height: 200px;
     overflow-y: scroll;
     background: ${(props) => props.theme.bgColor};
-
 `;
 
 export default SelectDropdown;

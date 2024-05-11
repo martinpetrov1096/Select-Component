@@ -14,11 +14,9 @@ const options = [
     {string: 'Ralph Hubbard', val: '8'}
 ]
 
-
 function App() {
 
     const [selectType, setSelectType] = useState('select');
-
 
     return (
         <Wrapper className="App">
@@ -35,15 +33,11 @@ function App() {
 }
 
 const Wrapper = styled.div`
-
-
     padding: 100px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
 `;
-
-
 
 export default App;

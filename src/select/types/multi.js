@@ -3,8 +3,6 @@ import { Input, Label, Wrapper } from './commonStyles';
 
 const MultiSelect = ({ options, identifier, setSelected, selected }) => {
 
-
-
     const multiSetSelected = (e) => {
         if (e.target.checked) {
             setSelected((selected) => [...selected, e.target.value]);
@@ -24,7 +22,7 @@ const MultiSelect = ({ options, identifier, setSelected, selected }) => {
                     <Label htmlFor={uniqueId} key={`${uniqueId}_label_key`}>{opt.string}</Label>
                 </Wrapper>
             );
-  });
+    });
 
     return (
         <>

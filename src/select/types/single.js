@@ -3,7 +3,6 @@ import { Input, Label, Wrapper } from './commonStyles';
 
 const SingleSelect = ({options, identifier, setSelected, selected}) => {
 
-    
     const optionsElements = options.map(opt => {
         const uniqueId =`${identifier}_${opt.val}`
 
@@ -15,12 +14,10 @@ const SingleSelect = ({options, identifier, setSelected, selected}) => {
         );
     })
 
-
     return (
         <>
             {optionsElements}
         </>
-
-    )
+    );
   }
   export default SingleSelect;

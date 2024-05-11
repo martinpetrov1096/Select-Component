@@ -5,3 +5,7 @@
 - Move the state to outside the select box
 - Use a map instead of array to check if the value already exists. Would have to research if this is possible/more effecient 
 using setState
+- Add a dark theme
+
+# Considerations
+- 
