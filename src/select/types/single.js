@@ -6,16 +6,27 @@ const SingleSelect = ({options, identifier, setSelected, selected}) => {
     const optionsElements = options.map(opt => {
         const uniqueId =`${identifier}_${opt.val}`
 
+        /**
+         * Need to allow a user to deselect their existing selection. Need to 
+         * use onClick instead of onChange since onChange won't be called on the
+         * same value being set.
+         */
+        const setSelectedAllowClear = (e) => {
+            setSelected(prevSelected => {
+                if (opt.val === selected[0]) {
+                    return [];
+                } else {
+                    return [opt.val]
+                }
+            })
+        }
         return (
             <Wrapper key={`${uniqueId}`}>
-                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val === selected[0]} onChange={() => setSelected([opt.val])} />
+                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val === selected[0]} onClick={setSelectedAllowClear} />
                 <Label htmlFor={uniqueId} key={`${uniqueId}_label_key`}>{opt.string}</Label>
             </Wrapper>
         );
     });
-
-
-
 
     return (
         <>
