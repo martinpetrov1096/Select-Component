@@ -69,11 +69,11 @@ const SelectDropdown = ({ type, options, identifier}) => {
     const handleBlur = (event) => {
         setShowDropDown(event.currentTarget.contains(event.relatedTarget));
     }
-    console.log(theme)
+
     return (
         <ThemeProvider theme={theme}>
-            <Wrapper tabindex="0" onFocus={() => setShowDropDown(true)} onBlur={handleBlur}>
-                <ValuesBox tabindex="0" onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)}>
+            <Wrapper tabIndex="0" onFocus={() => setShowDropDown(true)} onBlur={handleBlur}>
+                <ValuesBox  onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)}>
                     {selectedString}
                 </ValuesBox>
                 <SelectWrapper>

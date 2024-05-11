@@ -7,15 +7,19 @@ const SingleSelect = ({options, identifier, setSelected, selected}) => {
         const uniqueId =`${identifier}_${opt.val}`
 
         return (
-            <Wrapper key={`${uniqueId}_react`}>
-                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val.toString() === selected[0]} onChange={() => setSelected([opt.val.toString()])} />
+            <Wrapper key={`${uniqueId}`}>
+                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val === selected[0]} onChange={() => setSelected([opt.val])} />
                 <Label htmlFor={uniqueId} key={`${uniqueId}_label_key`}>{opt.string}</Label>
             </Wrapper>
         );
-    })
+    });
+
+
+
 
     return (
         <>
+  
             {optionsElements}
         </>
     );
