@@ -16,17 +16,50 @@ const options = [
 
 function App() {
 
-    const [selectType, setSelectType] = useState('select');
+    const [selected, setSelected] = useState([]);
+
+    const [selectConfig, setSelectConfig] = useState({
+        'type': 'single',
+        'overflowText': false,
+        'theme': 'light'
+    });
+
+    const setConfig = (param, val) => {
+        setSelectConfig({
+            ...selectConfig,
+           [param]: val,
+        });
+        console.log(selectConfig)
+    }
+
 
     return (
         <Wrapper className="App">
-            <div>
-                <input type="radio" id="single" name="type" onChange={() => setSelectType('select')} checked={selectType === 'select'}/>
-                <label htmlFor="single">Single</label>
-                <input type="radio" id="multi" name="type" onChange={() => setSelectType('multiselect')} checked={selectType === 'multiselect'}/>
-                <label htmlFor="multi">Multi</label>
-            </div>
-            <Select type={selectType} options={options} identifier="mySelectField"/>
+            <OptionWrapper>
+                <input type="radio" id="selectConfigSingle" onChange={() => setConfig('type', 'single')} 
+                    checked={selectConfig.type === 'single'}/>
+                <label htmlFor="selectConfigSingle">Single</label>
+                <input type="radio" id="selectConfigMulti" onChange={() =>  setConfig('type', 'multi')} 
+                    checked={selectConfig.type === 'multi'}/>
+                <label htmlFor="selectConfigMulti">Multi</label>
+            </OptionWrapper>
+            <OptionWrapper>
+                <input type="checkbox" id="selectConfigOverflowText"
+                    onChange={(e) => setConfig('overflowText', e.target.checked)} checked={selectConfig.checked}/>
+                <label htmlFor="selectConfigOverflowText">Allow Text Overflow</label>
+            </OptionWrapper>
+            <OptionWrapper>
+                <input type="radio" id="selectConfigThemeLight" onChange={() => setConfig('theme', 'light')} 
+                    checked={selectConfig.theme === 'light'}/>
+                <label htmlFor="selectConfigSingle">Light Theme</label>
+                <input type="radio" id="selectConfigMulti" onChange={() => setConfig('theme', 'dark')} 
+                    checked={selectConfig.theme === 'dark'}/>
+                <label htmlFor="selectConfigMulti">Dark Theme (Ignore Color Choices)</label>
+            </OptionWrapper>
+
+
+            <Select name="Name" options={options} identifier="mySelectField" selected={selected} 
+                setSelected={setSelected} config={selectConfig}/>
             <h3>Some Text after the select</h3>
         </Wrapper>
     );
@@ -38,6 +71,10 @@ const Wrapper = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+`;
+
+const OptionWrapper = styled.div`
+    margin: 10px;
 `;
 
 export default App;

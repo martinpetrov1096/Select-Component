@@ -1,9 +1,20 @@
 {
-    "name": "light",
-    "bgColor": "#FFFFFF",
-    "color": "#000000",
-    "accentColorLight": "rgb(239, 244, 250)",
-    "accentColorDark": "rgb(71, 117, 198)",
-    "transition": "all .5s ease-out",
-    "font": "'Roboto', sans-serif"
- }
+    "light": {
+        "bgColor": "#FFFFFF",
+        "color": "#000000",
+        "accentColorLight": "rgb(239, 244, 250)",
+        "accentColorDark": "rgb(71, 117, 198)",
+        "transition": "all .5s ease-out",
+        "font": "'Roboto', sans-serif"
+    },
+    "dark": {
+        "bgColor": "#596773",
+        "color": "#EEEEEE",
+        "accentColorLight": "rgb(56,139,255)",
+        "accentColorDark": "rgb(0,85,204)",
+        "transition": "all .5s ease-out",
+        "font": "'Roboto', sans-serif"
+    }
+
+
+}

@@ -12,6 +12,8 @@ export const Wrapper = styled.div`
     &:has(> input:checked) {
         background-color: ${props => props.theme.accentColorLight};
     }
+    color: ${props => props.theme.color};
+
 `;
 
 export const Label = styled.label`

@@ -5,9 +5,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import theme from './theme.json';
 
 
-const SelectDropdown = ({ type, options, identifier}) => {
+const SelectDropdown = ({ name, options, identifier, selected, setSelected, config }) => {
 
-    const [selected, setSelected] = useState([]);
+
     const [showDropDown, setShowDropDown] = useState(false);
 
     /**
@@ -35,10 +35,10 @@ const SelectDropdown = ({ type, options, identifier}) => {
      * should remove all selected options except the first one
      */
     useEffect(() => {
-        if (type === 'select' && selected.length > 1) {
+        if (config.type === 'single' && selected.length > 1) {
             setSelected(selected => [selected[0]]);
         }
-    }, [type]);
+    }, [config.type]);
 
     const selectedString = useMemo(() => {
         return options.filter((opt) => {
@@ -48,9 +48,9 @@ const SelectDropdown = ({ type, options, identifier}) => {
     }, [selected, options]);
 
     let component;
-    if (type === 'select') {
+    if (config.type === 'single') {
         component = <SingleSelect options={options} identifier={identifier} setSelected={setSelected} selected={selected}/>
-    } else if (type === 'multiselect') {
+    } else if (config.type === 'multi') {
         component = <MultiSelect options={options} identifier={identifier} setSelected={setSelected} selected={selected}/>
     }
 
@@ -71,9 +71,10 @@ const SelectDropdown = ({ type, options, identifier}) => {
     }
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme[config.theme]}>
             <Wrapper tabIndex="0" onFocus={() => setShowDropDown(true)} onBlur={handleBlur}>
-                <ValuesBox  onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)}>
+                <FormName>{name}</FormName>
+                <ValuesBox  onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)} overflowText={config.overflowText}>
                     {selectedString}
                 </ValuesBox>
                 <SelectWrapper>
@@ -96,13 +97,18 @@ const Wrapper = styled.div`
 `;
 const ValuesBox = styled.button`
 
-    background-color: transparent;
+    background-color: ${props => props.theme.bgColor};
     min-height: 39px;
+    height: ${props => props.overflowText ? 'auto' : '39px'};
     width: 100%;
     border: 1px ${props => props.theme.accentColorDark} solid;
     border-radius: 4px;
     padding: 8px;
     font-size: 14px;
+    color: ${props => props.theme.color};
+    overflow: ${props => props.overflowText ? 'visible' : 'hidden'};
+    white-space: ${props => props.overflowText ? 'normal' : 'nowrap'};
+    text-overflow: ellipsis;
     line-height: 1.5;
     cursor: pointer;
 `;
@@ -112,8 +118,16 @@ const SelectWrapper = styled.div`
     width: 100%;
     z-index: 100;
     max-height: 200px;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    scrollbar-color: ${props => `${props.theme.accentColorDark} ${props.theme.bgColor} `};
     overflow-y: scroll;
     background: ${(props) => props.theme.bgColor};
+`;
+const FormName = styled.h6`
+    margin: 0 0 2px 2px;
+    font-weight: 400;
+    color: ${props => props.theme.accentColorDark};
 `;
 
 export default SelectDropdown;
