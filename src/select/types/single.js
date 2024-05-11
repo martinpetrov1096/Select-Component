@@ -8,7 +8,7 @@ const SingleSelect = ({options, identifier, setSelected, selected}) => {
 
         /**
          * Need to allow a user to deselect their existing selection. Need to 
-         * use onClick instead of onChange since onChange won't be called on the
+         * use onInput instead of onChange since onChange won't be called on the
          * same value being set.
          */
         const setSelectedAllowClear = (e) => {
@@ -19,10 +19,11 @@ const SingleSelect = ({options, identifier, setSelected, selected}) => {
                     return [opt.val]
                 }
             })
+            console.log(selected)
         }
         return (
             <Wrapper key={`${uniqueId}`}>
-                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val === selected[0]} onClick={setSelectedAllowClear} />
+                <Input type="radio" id={uniqueId} name={identifier} key={`${uniqueId}_radio_key`} checked={opt.val === selected[0]} onClick={(e) => setSelectedAllowClear(e)}  />
                 <Label htmlFor={uniqueId} key={`${uniqueId}_label_key`}>{opt.string}</Label>
             </Wrapper>
         );

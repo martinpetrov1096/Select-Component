@@ -7,7 +7,6 @@ import theme from './theme.json';
 
 const SelectDropdown = ({ name, options, identifier, selected, setSelected, config }) => {
 
-
     const [showDropDown, setShowDropDown] = useState(false);
 
     /**
@@ -74,7 +73,7 @@ const SelectDropdown = ({ name, options, identifier, selected, setSelected, conf
         <ThemeProvider theme={theme[config.theme]}>
             <Wrapper tabIndex="0" onFocus={() => setShowDropDown(true)} onBlur={handleBlur}>
                 <FormName>{name}</FormName>
-                <ValuesBox  onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)} overflowText={config.overflowText}>
+                <ValuesBox  onFocus={() => setShowDropDown(showDown => console.log('here') && !showDown)} $overflowText={config.overflowText}>
                     {selectedString}
                 </ValuesBox>
                 <SelectWrapper>
@@ -82,7 +81,7 @@ const SelectDropdown = ({ name, options, identifier, selected, setSelected, conf
                 </SelectWrapper>
             </Wrapper>
         </ThemeProvider>
-    )
+    );
 }
 
 const Wrapper = styled.div`
@@ -99,15 +98,15 @@ const ValuesBox = styled.button`
 
     background-color: ${props => props.theme.bgColor};
     min-height: 39px;
-    height: ${props => props.overflowText ? 'auto' : '39px'};
+    height: ${props => props.$overflowText ? 'auto' : '39px'};
     width: 100%;
     border: 1px ${props => props.theme.accentColorDark} solid;
     border-radius: 4px;
     padding: 8px;
     font-size: 14px;
     color: ${props => props.theme.color};
-    overflow: ${props => props.overflowText ? 'visible' : 'hidden'};
-    white-space: ${props => props.overflowText ? 'normal' : 'nowrap'};
+    overflow: ${props => props.$overflowText ? 'visible' : 'hidden'};
+    white-space: ${props => props.$overflowText ? 'normal' : 'nowrap'};
     text-overflow: ellipsis;
     line-height: 1.5;
     cursor: pointer;

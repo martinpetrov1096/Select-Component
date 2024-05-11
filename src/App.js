@@ -17,7 +17,6 @@ const options = [
 function App() {
 
     const [selected, setSelected] = useState([]);
-
     const [selectConfig, setSelectConfig] = useState({
         'type': 'single',
         'overflowText': false,
@@ -29,12 +28,13 @@ function App() {
             ...selectConfig,
            [param]: val,
         });
-        console.log(selectConfig)
     }
-
 
     return (
         <Wrapper className="App">
+            {/*
+
+             */}
             <OptionWrapper>
                 <input type="radio" id="selectConfigSingle" onChange={() => setConfig('type', 'single')} 
                     checked={selectConfig.type === 'single'}/>
@@ -57,7 +57,9 @@ function App() {
                 <label htmlFor="selectConfigMulti">Dark Theme (Ignore Color Choices)</label>
             </OptionWrapper>
 
-
+            {/* 
+                MAIN SELECT COMPONENT PART
+            */}
             <Select name="Name" options={options} identifier="mySelectField" selected={selected} 
                 setSelected={setSelected} config={selectConfig}/>
             <h3>Some Text after the select</h3>
